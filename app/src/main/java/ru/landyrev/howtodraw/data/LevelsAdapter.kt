@@ -57,10 +57,10 @@ class LevelsAdapter(context: Context): RecyclerView.Adapter<RecyclerView.ViewHol
 
         when(item.type) {
             ViewTypes.body -> {
-                (holder as ViewHolder).titleView.text = item.data as Level
+                (holder as ViewHolder).titleView.text = (item.data as Level).title_ru
             }
             ViewTypes.header -> {
-                (holder as ViewHeaderHolder).titleView.text = "TestHeader"
+                (holder as ViewHeaderHolder).titleView.text = (item.data as Stage).title
             }
         }
     }
