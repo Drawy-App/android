@@ -23,9 +23,9 @@ class LevelsData(context: Context) {
         val data = yaml.load(context.assets.open("Images.bundle/levels.yaml"))
                 as List<LinkedHashMap<String, Any>>
         val allLevels: List<Level> = data.map { item ->
-            return@map Level(
-                    item["difficulty"] as String,
-                    item["level"] as String,
+            Level(
+                    (item["difficulty"] as String).toInt(),
+                    (item["level"] as String).toInt(),
                     item["name"] as String,
                     item["title_en"] as String,
                     item["title_ru"] as String,
@@ -33,14 +33,15 @@ class LevelsData(context: Context) {
             )
 
         }
-        val foldedLevels = allLevels.fold(initial = hashMapOf()) { acc: HashMap<String, MutableList<Level>>, level: Level ->
+        val foldedLevels = allLevels.fold(initial = hashMapOf()) { acc: HashMap<Int, MutableList<Level>>, level: Level ->
             if (acc[level.level] == null) acc[level.level] = mutableListOf()
             acc[level.level]!!.add(level)
             return@fold acc
         }
+
         return foldedLevels.keys.map { stageName ->
-            Stage(stageName.toInt(), foldedLevels[stageName]!!.toList())
-        }
+            Stage(stageName, foldedLevels[stageName]!!.toList())
+        }.sortedBy(Stage::stageNumber)
     }
 
     class ViewData(val type: Int, val data: Any)
@@ -58,6 +59,7 @@ class LevelsData(context: Context) {
                     return ViewData(ViewTypes.BODY, level)
                 }
             }
+            i++
         }
 
         return null
