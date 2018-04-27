@@ -1,4 +1,4 @@
-package ru.landyrev.howtodraw
+package ru.landyrev.howtodraw.util
 
 import android.app.Activity
 import android.content.Context

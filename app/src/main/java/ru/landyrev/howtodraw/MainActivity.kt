@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import ru.landyrev.howtodraw.data.LevelsAdapter
+import ru.landyrev.howtodraw.data.LevelsData
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mRecyclerView: RecyclerView
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LevelsData.loadImages(this)
         setContentView(R.layout.activity_main)
 
         mLayoutManager = LinearLayoutManager(this)
