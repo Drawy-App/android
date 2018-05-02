@@ -5,15 +5,30 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_details.*
 import ru.landyrev.howtodraw.data.Level
 import ru.landyrev.howtodraw.data.LevelsData
+import ru.landyrev.howtodraw.util.Background
 
 class DetailsActivity: AppCompatActivity() {
-    lateinit var level: Level
+    private lateinit var level: Level
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        detailsBackgroundView.background = Background.background
+
         level = LevelsData.levelBy(intent.getStringExtra("name"))
-        detailsTitleView.text = level.title_ru
+
+        detailsRatingView.rating = level.difficulty
+        detailsRatingView.solved = level.rating > 0
+
+        detailsStepsCount.text = "Шагов: ${level.tutorials.size}"
+
+        detailsPreviewTile.setImageBitmap(level.getPreview(this))
+        detailsTitle.text = level.title_ru
+        detailsToolbar.setNavigationOnClickListener {
+            this.finish()
+        }
+
+        tutorialsGallery.adapter = level.ImageAdapter(this)
     }
 }

@@ -2,4 +2,6 @@
     <string name="app_name">How to Draw</string>
     <string name="title">КАК РИСОВАТЬ</string>
     <string name="subtitle">ПО ШАГАМ</string>
+    <string name="detailsTitle">Рисование</string>
+    <string name="make_photo">Сфотографировать</string>
 </resources>

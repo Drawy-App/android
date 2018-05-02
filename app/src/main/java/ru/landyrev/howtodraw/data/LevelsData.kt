@@ -35,7 +35,7 @@ object LevelsData {
                     item["name"] as String,
                     item["title_en"] as String,
                     item["title_ru"] as String,
-                    item["tutorials"] as List<String>,
+                    (item["tutorials"] as List<String>).map {tutorial -> "Images.bundle/$tutorial"},
                     context
             )
 
