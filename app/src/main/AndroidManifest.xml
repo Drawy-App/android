@@ -27,6 +27,9 @@
         <activity android:name=".DetailsActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".GalleryActivity"
+            android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

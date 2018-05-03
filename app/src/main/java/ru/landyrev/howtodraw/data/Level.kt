@@ -1,14 +1,18 @@
 package ru.landyrev.howtodraw.data;
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.CardView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import ru.landyrev.howtodraw.DetailsActivity
+import ru.landyrev.howtodraw.GalleryActivity
 import ru.landyrev.howtodraw.views.ImageCardView
 
 class Level(val difficulty: Int, val level: Int, val name: String, val title_en: String,
@@ -36,7 +40,7 @@ class Level(val difficulty: Int, val level: Int, val name: String, val title_en:
         )
     }
 
-    inner class ImageAdapter(val context: Context): BaseAdapter() {
+    inner class ImageAdapter(private val context: Context): BaseAdapter() {
         override fun getCount(): Int {
             return tutorials.size
         }
@@ -55,6 +59,9 @@ class Level(val difficulty: Int, val level: Int, val name: String, val title_en:
                                 tutorials[number]
                         )
                 )
+                cardView.setOnClickListener {
+                    openGallery()
+                }
             } else {
                 cardView = convertView as ImageCardView
             }
@@ -64,5 +71,11 @@ class Level(val difficulty: Int, val level: Int, val name: String, val title_en:
         override fun getItem(p0: Int): Any? {
             return null
         }
+
+        private fun openGallery() {
+            val intent = Intent(context, GalleryActivity::class.java)
+            context.startActivity(intent)
+        }
+
     }
 }

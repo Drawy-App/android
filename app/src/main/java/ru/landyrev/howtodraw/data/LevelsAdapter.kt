@@ -1,7 +1,9 @@
 package ru.landyrev.howtodraw.data
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -60,6 +62,7 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
         return LevelsData.viewByIndex(position)!!.type
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         val item = LevelsData.viewByIndex(position)!!
 
@@ -72,7 +75,9 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
                     holder.starViews[i].setImageResource(R.drawable.star_empty)
                 }
                 holder.cardView.setOnClickListener({
-                    openTutorial(level)
+                    Handler().postDelayed({
+                        openTutorial(level)
+                    }, 150)
                 })
             }
             ViewTypes.header -> {
