@@ -6,5 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:colorForeground">@color/colorForeground</item>
     </style>
+    
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">#000</item>
+    </style>
 
 </resources>

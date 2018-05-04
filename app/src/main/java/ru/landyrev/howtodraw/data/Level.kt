@@ -73,7 +73,9 @@ class Level(val difficulty: Int, val level: Int, val name: String, val title_en:
         }
 
         private fun openGallery() {
-            val intent = Intent(context, GalleryActivity::class.java)
+            val intent = Intent(context, GalleryActivity::class.java).apply {
+                putExtra("level_name", name)
+            }
             context.startActivity(intent)
         }
 
