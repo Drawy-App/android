@@ -3,11 +3,12 @@ package ru.landyrev.howtodraw
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
+import android.widget.Button
 import kotlinx.android.synthetic.main.activity_galley.*
 import ru.landyrev.howtodraw.data.Level
 import ru.landyrev.howtodraw.data.LevelsData
@@ -24,11 +25,35 @@ class GalleryActivity: FragmentActivity()  {
                 intent.getStringExtra("level_name")
         )
 
+        nextButton.setOnClickListener {
+            galleryViewPager.setCurrentItem(galleryViewPager.currentItem + 1, true)
+        }
+
         galleryToolbar.title = level.title_ru
         galleryToolbar.setNavigationOnClickListener {
             this.finish()
         }
         galleryViewPager.adapter = GalleryPagerAdapter(supportFragmentManager, level, this)
+        galleryViewPager.addOnPageChangeListener(OnPageChange())
+        galleryViewPager.setCurrentItem(intent.getIntExtra("position", 0), false)
+    }
+
+    inner class OnPageChange: ViewPager.OnPageChangeListener {
+        override fun onPageSelected(position: Int) {
+//            galleryToolbar.title = "${level.title_ru} (${position + 1} из ${level.tutorials.size})"
+            if (position + 1 == level.tutorials.size) {
+                nextButton.visibility = Button.INVISIBLE
+                recognizeButton.visibility = Button.VISIBLE
+            } else {
+                nextButton.visibility = Button.VISIBLE
+                recognizeButton.visibility = Button.INVISIBLE
+            }
+        }
+
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+        override fun onPageScrollStateChanged(state: Int) {}
+
     }
 }
 

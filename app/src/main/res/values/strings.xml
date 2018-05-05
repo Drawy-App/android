@@ -5,4 +5,5 @@
     <string name="detailsTitle">Рисование</string>
     <string name="make_photo">Сфотографировать</string>
     <string name="recognizeButton">Распознать</string>
+    <string name="nextButton">Дальше</string>
 </resources>

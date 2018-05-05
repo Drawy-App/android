@@ -60,7 +60,7 @@ class Level(val difficulty: Int, val level: Int, val name: String, val title_en:
                         )
                 )
                 cardView.setOnClickListener {
-                    openGallery()
+                    openGallery(number)
                 }
             } else {
                 cardView = convertView as ImageCardView
@@ -72,9 +72,10 @@ class Level(val difficulty: Int, val level: Int, val name: String, val title_en:
             return null
         }
 
-        private fun openGallery() {
+        private fun openGallery(pageNumber: Int) {
             val intent = Intent(context, GalleryActivity::class.java).apply {
                 putExtra("level_name", name)
+                putExtra("position", pageNumber)
             }
             context.startActivity(intent)
         }
