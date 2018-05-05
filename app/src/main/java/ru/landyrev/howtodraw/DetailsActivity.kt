@@ -33,10 +33,14 @@ class DetailsActivity: AppCompatActivity() {
         tutorialsGallery.adapter = level.ImageAdapter(this)
 
         detailsCaptureButton.setOnClickListener {
-            val intent = Intent(this, CameraActivity::class.java).apply {
-                putExtra("level_name", level.name)
-            }
-            this.startActivity(intent)
+            openCamera()
         }
+    }
+
+    fun openCamera() {
+        val intent = Intent(this, CameraActivity::class.java).apply {
+            putExtra("level_name", level.name)
+        }
+        this.startActivity(intent)
     }
 }

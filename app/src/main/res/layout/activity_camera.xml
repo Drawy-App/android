@@ -4,16 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="ru.landyrev.howtodraw.CameraActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/cameraToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/transparent"
+        app:title="Распознавание"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
     <io.fotoapparat.view.CameraView
         android:id="@+id/previewView"
-        android:layout_width="384dp"
-        android:layout_height="384dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/cameraToolbar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/cameraHint"
+        app:layout_constraintTop_toBottomOf="@id/previewView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/colorForeground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>

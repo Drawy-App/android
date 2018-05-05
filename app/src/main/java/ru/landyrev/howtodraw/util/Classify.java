@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.tensorflow.lite.Interpreter;
 
-public class Classify {
+public abstract class Classify {
 
     private static final String MODEL_FILE_NAME = "MyNet.lite";
     private static final String LABEL_PATH = "labels.txt";
@@ -29,17 +29,17 @@ public class Classify {
     private static final int IMAGE_MEAN = 128;
     private static final float IMAGE_STD = 128.0f;
 
-    private static final int DIM_BATCH_SIZE = 1;
-
     private static final int DIM_PIXEL_SIZE = 1;
 
-    static final int DIM_IMG_SIZE_X = 224;
-    static final int DIM_IMG_SIZE_Y = 224;
+    private static final int DIM_IMG_SIZE_X = 224;
+    private static final int DIM_IMG_SIZE_Y = 224;
 
-    Interpreter tflite;
+    abstract void onRecognize(String label);
+
+    private Interpreter tflite;
     private List<String> labelList;
-    private ByteBuffer imgData = null;
-    private float[][] labelProbArray = null;
+    private ByteBuffer imgData;
+    private float[][] labelProbArray;
 
     public Classify(Activity activity) throws IOException {
         tflite = new Interpreter(loadModelFile(activity));
@@ -47,19 +47,18 @@ public class Classify {
         imgData = ByteBuffer.allocateDirect(DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE * 4);
         imgData.order(ByteOrder.nativeOrder());
         labelProbArray = new float[1][labelList.size()];
+
     }
 
-    public void timer(String s) {
+
+    private void timer(String s) {
         Long secs = (SystemClock.uptimeMillis());
         Log.w(TAG, secs.toString() + ": " + s);
     }
 
     public void classify(Bitmap image) {
-        timer("Start classify");
         convertBitmapToByteBuffer(image);
-        timer("Converted to buffer");
         tflite.run(imgData, labelProbArray);
-        timer("Labeled");
 
         int label = 0;
         float maxValue = 0;
@@ -69,9 +68,8 @@ public class Classify {
                 maxValue = labelProbArray[0][i];
             }
         }
-
-
-        timer(labelList.get(label));
+        String textLabel = labelList.get(label).replace(" ", "_");
+        onRecognize(textLabel);
     }
 
     private void convertBitmapToByteBuffer(Bitmap bitmap) {
@@ -82,16 +80,12 @@ public class Classify {
         charValues.rewind();
         bitmap.copyPixelsToBuffer(charValues);
 
-        byte[] test = charValues.array();
+        byte[] pixels = charValues.array();
 
-        byte test1 = (byte) (test[2] & 0xFF);
-        int test2 = (test[2] & 0xFF);
-
-        for (int i=0; i < test.length; i++) {
-            final float value = ((int) (test[i] & 0xFF) - 128) / 128.0f;
+        for (int i=0; i < pixels.length; i++) {
+            final float value = ((pixels[i] & 0xFF) - IMAGE_MEAN) / IMAGE_STD;
             imgData.putFloat(i * 4, value);
         }
-//        bitmap.copyPixelsToBuffer(imgData);
     }
 
     private MappedByteBuffer loadModelFile(Activity activity) throws IOException {
