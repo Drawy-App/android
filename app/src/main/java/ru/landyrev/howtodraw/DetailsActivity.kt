@@ -1,5 +1,6 @@
 package ru.landyrev.howtodraw
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_details.*
@@ -30,5 +31,12 @@ class DetailsActivity: AppCompatActivity() {
         }
 
         tutorialsGallery.adapter = level.ImageAdapter(this)
+
+        detailsCaptureButton.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java).apply {
+                putExtra("level_name", level.name)
+            }
+            this.startActivity(intent)
+        }
     }
 }

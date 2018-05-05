@@ -21,17 +21,17 @@ import org.tensorflow.lite.Interpreter;
 
 public class Classify {
 
-    private static final String MODEL_FILE_NAME = "net.lite";
+    private static final String MODEL_FILE_NAME = "MyNet.lite";
     private static final String LABEL_PATH = "labels.txt";
     private static final String TAG = "HTD_CLASSIFY";
-    private int[] intValues = new int[224 * 224];
+    private ByteBuffer charValues = ByteBuffer.allocate(DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y);
 
     private static final int IMAGE_MEAN = 128;
     private static final float IMAGE_STD = 128.0f;
 
     private static final int DIM_BATCH_SIZE = 1;
 
-    private static final int DIM_PIXEL_SIZE = 4;
+    private static final int DIM_PIXEL_SIZE = 1;
 
     static final int DIM_IMG_SIZE_X = 224;
     static final int DIM_IMG_SIZE_Y = 224;
@@ -44,7 +44,7 @@ public class Classify {
     public Classify(Activity activity) throws IOException {
         tflite = new Interpreter(loadModelFile(activity));
         labelList = loadLabelList(activity);
-        imgData = ByteBuffer.allocateDirect(DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE);
+        imgData = ByteBuffer.allocateDirect(DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE * 4);
         imgData.order(ByteOrder.nativeOrder());
         labelProbArray = new float[1][labelList.size()];
     }
@@ -79,16 +79,19 @@ public class Classify {
             return;
         }
         imgData.rewind();
-        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
-//        bitmap.copyPixelsToBuffer(imgData);
-        // Convert the image to floating point.
-        int pixel = 0;
-        for (int i = 0; i < 224; ++i) {
-            for (int j = 0; j < 224; ++j) {
-                final int val = intValues[pixel++];
-                imgData.putFloat((((val) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
-            }
+        charValues.rewind();
+        bitmap.copyPixelsToBuffer(charValues);
+
+        byte[] test = charValues.array();
+
+        byte test1 = (byte) (test[2] & 0xFF);
+        int test2 = (test[2] & 0xFF);
+
+        for (int i=0; i < test.length; i++) {
+            final float value = ((int) (test[i] & 0xFF) - 128) / 128.0f;
+            imgData.putFloat(i * 4, value);
         }
+//        bitmap.copyPixelsToBuffer(imgData);
     }
 
     private MappedByteBuffer loadModelFile(Activity activity) throws IOException {

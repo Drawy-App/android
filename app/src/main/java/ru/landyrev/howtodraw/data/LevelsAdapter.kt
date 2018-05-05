@@ -77,7 +77,7 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
                 holder.cardView.setOnClickListener({
                     Handler().postDelayed({
                         openTutorial(level)
-                    }, 150)
+                    }, 50)
                 })
             }
             ViewTypes.header -> {

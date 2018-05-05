@@ -11,19 +11,26 @@ import ru.landyrev.howtodraw.util.Camera
 
 class CameraActivity : Activity() {
 
-    private var CAMERA_PERMISSION: Int = 0
+    private val CAMERA_PERMISSION: Int = 0
+    private lateinit var camera: Camera
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
         checkPermissions()
-
-        val camera = Camera(this, findViewById(R.id.previewView),
+        camera = Camera(this, findViewById(R.id.previewView),
                 findViewById(R.id.previewImage))
+    }
+
+    override fun onResume() {
+        super.onResume()
         camera.start()
+    }
 
-
+    override fun onPause() {
+        super.onPause()
+        camera.stop()
     }
 
     private fun checkPermissions() {

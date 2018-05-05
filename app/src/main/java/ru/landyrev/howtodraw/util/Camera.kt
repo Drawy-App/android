@@ -2,7 +2,9 @@ package ru.landyrev.howtodraw.util
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Handler
+import android.util.Log
 import android.widget.ImageView
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.configuration.CameraConfiguration
@@ -12,6 +14,8 @@ import io.fotoapparat.selector.back
 import io.fotoapparat.view.CameraView
 import ru.landyrev.howtodraw.util.Classify
 import ru.landyrev.howtodraw.util.Graphic
+import java.io.ByteArrayOutputStream
+import java.nio.ByteBuffer
 
 /**
  * Created by landyrev on 24.03.2018.
@@ -47,13 +51,13 @@ class Camera(context: Context, cameraView: CameraView, previewImage: ImageView) 
     }
 
     private fun frameProcessor(frame: Frame) {
-        classify.timer("frame captured")
+//        classify.timer("frame captured")
         val greyImage = Graphic.frameToGray(frame)
-        classify.timer("frame grayed")
+//        classify.timer("frame grayed")
         val realImage = Graphic.bitmapFromGray(greyImage, frame.size.width, frame.size.height)
-        classify.timer("gray bitmapped")
+//        classify.timer("gray bitmapped")
         classify.classify(realImage)
-
+//
 //        mainHandler.post {
 //            imageView.setImageBitmap(realImage)
 //        }
