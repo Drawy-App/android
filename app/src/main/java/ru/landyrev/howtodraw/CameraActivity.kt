@@ -1,29 +1,58 @@
 package ru.landyrev.howtodraw
 
 import android.Manifest
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
+import android.support.annotation.MainThread
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.view.View
 import ru.landyrev.howtodraw.data.Level
 import ru.landyrev.howtodraw.data.LevelsData
 import ru.landyrev.howtodraw.util.Camera
 import kotlinx.android.synthetic.main.activity_camera.*
+import ru.landyrev.howtodraw.util.Background
 
 class CameraActivity : Activity() {
 
     private val CAMERA_PERMISSION: Int = 0
     private lateinit var camera: Camera
     private lateinit var level: Level
+    private lateinit var mainHandler: Handler
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mainHandler = Handler(this.mainLooper)
         level = LevelsData.levelBy(intent.getStringExtra("level_name"))
         setContentView(R.layout.activity_camera)
         checkPermissions()
-        camera = Camera(this, findViewById(R.id.previewView), level)
+        cameraLayout.background = Background.background
+        camera = Camera(this, findViewById(R.id.previewView), level).apply {
+            onSuccess = {
+                level.solve()
+                this@CameraActivity.finish()
+            }
+            onCapture = {
+                mainHandler.post {
+                    cameraHint.text = "Кажется мы нашли что-то..."
+                    cameraFrame.background = ContextCompat.getDrawable(
+                            this@CameraActivity,
+                            R.drawable.camera_success_background
+                    )
+                }
+            }
+            onLost = {
+                mainHandler.post { cameraHint.text = "" }
+                cameraFrame.setBackgroundColor(Color.TRANSPARENT)
+            }
+        }
 
         cameraToolbar.setNavigationOnClickListener {
             this.finish()

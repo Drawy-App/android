@@ -9,16 +9,27 @@ import ru.landyrev.howtodraw.R
 
 
 class RatingView(context: Context, attrs: AttributeSet): ConstraintLayout(context, attrs) {
-    private lateinit var stars: List<ImageView>
-    var rating: Int = 2
+    private var stars: List<ImageView>? = null
+    var rating: Int = 0
 
     var solved: Boolean = false
 
     fun redraw() {
+        if (stars == null) {
+            return
+        }
         (0 until rating).forEach { i ->
-            stars[i].setImageResource( if (solved) R.drawable.star else R.drawable.star_empty)
+            stars!![i].setImageResource( if (solved) R.drawable.star else R.drawable.star_empty)
         }
     }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        stars!!.forEach { star ->
+            star.setImageDrawable(null)
+        }
+    }
+
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -28,6 +39,7 @@ class RatingView(context: Context, attrs: AttributeSet): ConstraintLayout(contex
                 findViewById(R.id.ratingStar2)
         )
     }
+
 
     init {
         inflate(context, R.layout.rating, this)

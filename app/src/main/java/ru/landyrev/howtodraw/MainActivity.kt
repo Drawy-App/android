@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             layoutManager = mLayoutManager
             adapter = viewAdapter
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        (viewAdapter as LevelsAdapter).updateData()
     }
 }

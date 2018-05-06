@@ -26,8 +26,8 @@ public abstract class Classify {
     private static final String TAG = "HTD_CLASSIFY";
     private ByteBuffer charValues = ByteBuffer.allocate(DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y);
 
-    private static final int IMAGE_MEAN = 128;
-    private static final float IMAGE_STD = 128.0f;
+    private static final int IMAGE_MEAN = 256;
+    private static final float IMAGE_STD = 256.0f;
 
     private static final int DIM_PIXEL_SIZE = 1;
 

@@ -37,7 +37,12 @@ class DetailsActivity: AppCompatActivity() {
         }
     }
 
-    fun openCamera() {
+    override fun onResume() {
+        super.onResume()
+        detailsRatingView.solved = level.rating > 0
+    }
+
+    private fun openCamera() {
         val intent = Intent(this, CameraActivity::class.java).apply {
             putExtra("level_name", level.name)
         }

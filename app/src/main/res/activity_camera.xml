@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/cameraLayout"
     android:background="@color/colorPrimary"
     tools:context="ru.landyrev.howtodraw.CameraActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/cameraToolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +34,8 @@
     </io.fotoapparat.view.CameraView>
 
     <ImageView
-        android:id="@+id/cameraFrame"
+        android:elevation="10dp"
+        android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1"

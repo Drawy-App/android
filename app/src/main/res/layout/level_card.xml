@@ -51,28 +51,11 @@
                     android:textColor="#000"
                     android:textSize="18sp" />
 
-                <LinearLayout
+                <ru.landyrev.howtodraw.views.RatingView
+                    android:id="@+id/cardRatingView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_height="wrap_content" />
 
-                    <ImageView
-                        android:id="@+id/cardStar0"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp" />
-
-                    <ImageView
-                        android:id="@+id/cardStar1"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginStart="4dp" />
-
-                    <ImageView
-                        android:id="@+id/cardStar2"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginStart="4dp" />
-                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

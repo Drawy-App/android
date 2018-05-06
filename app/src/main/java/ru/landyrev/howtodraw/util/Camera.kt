@@ -2,6 +2,7 @@ package ru.landyrev.howtodraw.util
 
 import android.app.Activity
 import android.content.Context
+import android.os.Handler
 import android.os.SystemClock
 import android.util.Log
 import io.fotoapparat.Fotoapparat
@@ -25,12 +26,15 @@ class Camera(context: Context, cameraView: CameraView, private val level: Level)
 
     inner class Classifier(activity: Activity): Classify(activity) {
         override fun onRecognize(label: String?) {
-            onRecognizeLabel(label!!)
+            onCaptureLabelLabel(label!!)
         }
 
     }
     private val classify = Classifier(context as Activity)
 
+    var onCapture: (() -> Unit)? = null
+    var onSuccess: (() -> Unit)? = null
+    var onLost: (() -> Unit)? = null
 
     init {
         val configuration = CameraConfiguration(
@@ -46,25 +50,26 @@ class Camera(context: Context, cameraView: CameraView, private val level: Level)
         )
     }
 
-    fun onRecognizeLabel(label: String) {
+    fun onCaptureLabelLabel(label: String) {
         Log.w("CAPTURE", label)
         val nowTime = SystemClock.uptimeMillis()
         if (label == level.name) {
+            if (onCapture != null) { onCapture!!() }
             recognizeCount++
             if (!isSuccess) {
                 firstRecognizeTime = SystemClock.uptimeMillis()
                 isSuccess = true
             }
-            if (nowTime - firstRecognizeTime > 60 * 3) {
+            if (nowTime - firstRecognizeTime > 1000 * 2) {
                 if (recognizeCount >= 3) {
-                    Log.w("URA", "SUCCESS")
+                    if (onSuccess != null) { onSuccess!!() }
                 }
             }
         } else {
             if (isSuccess) {
                 isSuccess = false
                 recognizeCount = 0
-                Log.w("LOST", "LOST")
+                if (onLost != null) { onLost!!() }
             }
         }
     }

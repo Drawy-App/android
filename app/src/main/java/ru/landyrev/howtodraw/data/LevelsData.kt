@@ -63,7 +63,7 @@ object LevelsData {
             stage.levels.forEach { level ->
                 i++
                 if (i == index) {
-                    return ViewData(ViewTypes.BODY, level)
+                    return ViewData(ViewTypes.BODY, level.name)
                 }
             }
             i++

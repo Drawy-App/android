@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Handler
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +16,22 @@ import android.widget.TextView
 import kotlinx.android.synthetic.*
 import ru.landyrev.howtodraw.DetailsActivity
 import ru.landyrev.howtodraw.R
+import ru.landyrev.howtodraw.views.RatingView
 
 
 class LevelsAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var openedItem: Int? = null
+
     object ViewTypes {
         const val header: Int = 0
         const val body: Int = 1
+    }
+
+    fun updateData() {
+        if (openedItem != null) {
+            this.notifyItemChanged(openedItem!!)
+        }
     }
 
 
@@ -29,33 +39,31 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
         return LevelsData.totalLength
     }
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ViewBodyHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val cardView: CardView = itemView.findViewById(R.id.tutorialCardView)
         val titleView: TextView = itemView.findViewById(R.id.tutorialCardViewTitle)
         val previewView: ImageView = itemView.findViewById(R.id.cardPreviewImage)
-        val starViews: List<ImageView> = listOf(
-                itemView.findViewById(R.id.cardStar0),
-                itemView.findViewById(R.id.cardStar1),
-                itemView.findViewById(R.id.cardStar2)
-        )
+        val cardRatingView: RatingView = itemView.findViewById(R.id.cardRatingView)
     }
 
     class ViewHeaderHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val titleView: TextView = itemView.findViewById(R.id.levelSectionHeaderTitle)
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        when(viewType) {
+        return when(viewType) {
             ViewTypes.header -> {
                 val linearView = LayoutInflater.from(parent!!.context)
                         .inflate(R.layout.level_header, parent, false) as LinearLayout
-                return ViewHeaderHolder(linearView)
+                ViewHeaderHolder(linearView)
+            }
+            else -> {
+                val linearView = LayoutInflater.from(parent!!.context)
+                        .inflate(R.layout.level_card, parent, false) as LinearLayout
+                ViewBodyHolder(linearView)
             }
         }
-
-        val linearView = LayoutInflater.from(parent!!.context)
-                .inflate(R.layout.level_card, parent, false) as LinearLayout
-        return ViewHolder(linearView)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -64,21 +72,24 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        val item = LevelsData.viewByIndex(position)!!
+        val item = LevelsData.viewByIndex(holder!!.adapterPosition)!!
 
         when(item.type) {
             ViewTypes.body -> {
-                val level = item.data as Level
-                (holder as ViewHolder).titleView.text = level.title_ru
+                val level = LevelsData.levelBy(item.data as String)
+                (holder as ViewBodyHolder).titleView.text = level.title_ru
                 holder.previewView.setImageBitmap(level.getPreview(context))
-                (0 until level.difficulty).forEach { i ->
-                    holder.starViews[i].setImageResource(R.drawable.star_empty)
-                }
+                val solved = level.rating > 0
+                holder.cardRatingView.rating = level.difficulty
+                holder.cardRatingView.solved = solved
+
                 holder.cardView.setOnClickListener({
                     Handler().postDelayed({
+                        openedItem = holder.adapterPosition
                         openTutorial(level)
                     }, 50)
                 })
+                holder.cardRatingView.redraw()
             }
             ViewTypes.header -> {
                 (holder as ViewHeaderHolder).titleView.text = (item.data as Stage).title
