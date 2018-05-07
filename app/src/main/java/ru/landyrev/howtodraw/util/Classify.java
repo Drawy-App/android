@@ -21,7 +21,7 @@ import org.tensorflow.lite.Interpreter;
 
 public abstract class Classify {
 
-    private static final String MODEL_FILE_NAME = "MyNet.lite";
+    private static final String MODEL_FILE_NAME = "saved_model.pb";
     private static final String LABEL_PATH = "labels.txt";
     private static final String TAG = "HTD_CLASSIFY";
     private ByteBuffer charValues = ByteBuffer.allocate(DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y);
