@@ -24,13 +24,12 @@ class Camera(context: Context, cameraView: CameraView, private val level: Level)
     private var recognizeCount = 0
     private var isSuccess = false
 
-    inner class Classifier(activity: Activity): Classify(activity) {
-        override fun onRecognize(label: String?) {
-            onCaptureLabelLabel(label!!)
-        }
-
-    }
-    private val classify = Classifier(context as Activity)
+    private val classify = Classify.create(context.assets,
+            "graph.pb",
+            "labels.txt",
+            224, 128, 128.0f,
+            "Placeholder", "final_result"
+    )
 
     var onCapture: (() -> Unit)? = null
     var onSuccess: (() -> Unit)? = null
@@ -86,7 +85,10 @@ class Camera(context: Context, cameraView: CameraView, private val level: Level)
     private fun frameProcessor(frame: Frame) {
         val greyImage = Graphic.frameToGray(frame)
         val realImage = Graphic.bitmapFromGray(greyImage, frame.size.width, frame.size.height)
-        classify.classify(realImage)
+        val result = classify.recognizeImage(realImage)
+        if (result.size > 0) {
+            onCaptureLabelLabel(result[0].title.replace(" ", "_"))
+        }
     }
 
 
