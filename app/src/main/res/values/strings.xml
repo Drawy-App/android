@@ -6,4 +6,7 @@
     <string name="make_photo">Сфотографировать</string>
     <string name="recognizeButton">Распознать</string>
     <string name="nextButton">Дальше</string>
+    <string name="successTitle">Ура, у вас получилось!</string>
+    <string name="successSubTitle">Скорее начните следующий рисунок</string>
+    <string name="continueButton">Продолжить</string>
 </resources>

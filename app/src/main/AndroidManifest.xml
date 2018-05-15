@@ -30,6 +30,7 @@
         <activity android:name=".GalleryActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".CameraActivity" />
+        <activity android:name=".SuccessActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -4,6 +4,7 @@ import android.Manifest
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -25,6 +26,7 @@ class CameraActivity : Activity() {
     private lateinit var camera: Camera
     private lateinit var level: Level
     private lateinit var mainHandler: Handler
+    private var solved = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,8 +38,7 @@ class CameraActivity : Activity() {
         cameraLayout.background = Background.background
         camera = Camera(this, findViewById(R.id.previewView), level).apply {
             onSuccess = {
-                level.solve()
-                this@CameraActivity.finish()
+                onSuccess()
             }
             onCapture = {
                 mainHandler.post {
@@ -56,6 +57,17 @@ class CameraActivity : Activity() {
 
         cameraToolbar.setNavigationOnClickListener {
             this.finish()
+        }
+    }
+
+    fun onSuccess() {
+        level.solve()
+        if (!solved) {
+            solved = true
+            mainHandler.post {
+                val intent = Intent(this, SuccessActivity::class.java)
+                this.startActivity(intent)
+            }
         }
     }
 

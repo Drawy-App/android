@@ -9,7 +9,11 @@ import io.fotoapparat.Fotoapparat
 import io.fotoapparat.configuration.CameraConfiguration
 import io.fotoapparat.parameter.ScaleType
 import io.fotoapparat.preview.Frame
+import io.fotoapparat.result.transformer.originalResolution
+import io.fotoapparat.selector.ResolutionSelector
 import io.fotoapparat.selector.back
+import io.fotoapparat.selector.highestResolution
+import io.fotoapparat.selector.manualJpegQuality
 import io.fotoapparat.view.CameraView
 import ru.landyrev.howtodraw.data.Level
 import ru.landyrev.howtodraw.data.LevelsData
@@ -37,7 +41,8 @@ class Camera(context: Context, cameraView: CameraView, private val level: Level)
 
     init {
         val configuration = CameraConfiguration(
-                frameProcessor = { frame -> frameProcessor(frame) }
+                frameProcessor = { frame -> frameProcessor(frame) },
+                previewResolution = highestResolution()
         )
 
         fotoapparat = Fotoapparat(
