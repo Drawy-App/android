@@ -18,5 +18,10 @@ class SuccessActivity: AppCompatActivity() {
             }
             this.startActivity(intent)
         }
+
+        val difficulty = intent.getIntExtra("difficulty", 0)
+
+        successRating.text = (1..difficulty).joinToString(" ") { "\uD83C\uDF1F" }
+
     }
 }

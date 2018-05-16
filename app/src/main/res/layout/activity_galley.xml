@@ -43,7 +43,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:onClick="nextPage"
             android:clickable="true"
             android:focusable="true"
             android:visibility="visible"

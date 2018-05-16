@@ -22,10 +22,10 @@ class DetailsActivity: AppCompatActivity() {
         detailsRatingView.rating = level.difficulty
         detailsRatingView.solved = level.rating > 0
 
-        detailsStepsCount.text = "Шагов: ${level.tutorials.size}"
+        detailsStepsCount.text = getString(R.string.steps, level.tutorials.size)
 
         detailsPreviewTile.setImageBitmap(level.getPreview(this))
-        detailsTitle.text = level.title_ru
+        detailsTitle.text = level.title
         detailsToolbar.setNavigationOnClickListener {
             this.finish()
         }

@@ -26,6 +26,7 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
     object ViewTypes {
         const val header: Int = 0
         const val body: Int = 1
+        const val divider: Int = 2
     }
 
     fun updateData() {
@@ -36,7 +37,9 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
 
 
     override fun getItemCount(): Int {
-        return LevelsData.totalLength
+        var itemsCount = LevelsData.totalLength + LevelsData.stagesCount
+        if (LevelsData.hasLockedLevels) { itemsCount += 1 }
+        return itemsCount
     }
 
     class ViewBodyHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -50,6 +53,10 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
         val titleView: TextView = itemView.findViewById(R.id.levelSectionHeaderTitle)
     }
 
+    class ViewDividerHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val title: TextView = itemView.findViewById(R.id.dividerTitle)
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
@@ -57,6 +64,11 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
                 val linearView = LayoutInflater.from(parent!!.context)
                         .inflate(R.layout.level_header, parent, false) as LinearLayout
                 ViewHeaderHolder(linearView)
+            }
+            ViewTypes.divider -> {
+                val linearView = LayoutInflater.from(parent!!.context)
+                        .inflate(R.layout.divider, parent, false) as LinearLayout
+                ViewDividerHolder(linearView)
             }
             else -> {
                 val linearView = LayoutInflater.from(parent!!.context)
@@ -70,29 +82,52 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
         return LevelsData.viewByIndex(position)!!.type
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         val item = LevelsData.viewByIndex(holder!!.adapterPosition)!!
 
         when(item.type) {
             ViewTypes.body -> {
                 val level = LevelsData.levelBy(item.data as String)
-                (holder as ViewBodyHolder).titleView.text = level.title_ru
+                (holder as ViewBodyHolder).titleView.text = level.title
                 holder.previewView.setImageBitmap(level.getPreview(context))
                 val solved = level.rating > 0
                 holder.cardRatingView.rating = level.difficulty
                 holder.cardRatingView.solved = solved
 
-                holder.cardView.setOnClickListener({
-                    Handler().postDelayed({
-                        openedItem = holder.adapterPosition
-                        openTutorial(level)
-                    }, 50)
-                })
+                if (!item.isUnlocked) {
+                    holder.cardView.alpha = 0.3f
+                    holder.cardView.setOnClickListener(null)
+                    holder.cardView.isClickable = false
+                } else {
+                    holder.cardView.isClickable = true
+                    holder.cardView.alpha = 1.0f
+
+                    holder.cardView.setOnClickListener({
+                        Handler().postDelayed({
+                            openedItem = holder.adapterPosition
+                            openTutorial(level)
+                        }, 50)
+                    })
+                }
+
                 holder.cardRatingView.redraw()
             }
             ViewTypes.header -> {
-                (holder as ViewHeaderHolder).titleView.text = (item.data as Stage).title
+                (holder as ViewHeaderHolder).titleView.text = context.getString(
+                        R.string.level,
+                        (item.data as Stage).stageNumber
+                )
+                if (!item.isUnlocked) {
+                    holder.titleView.alpha = 0.3f
+                } else {
+                    holder.titleView.alpha = 1.0f
+                }
+            }
+            ViewTypes.divider -> {
+                (holder as ViewDividerHolder).title.text = context.getString(
+                        R.string.divider_text,
+                        LevelsData.ratingToNewLevel
+                )
             }
         }
     }

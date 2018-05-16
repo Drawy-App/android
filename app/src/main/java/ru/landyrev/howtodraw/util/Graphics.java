@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 
 import io.fotoapparat.preview.Frame;
 
-public class Graphics {
+class Graphics {
 
     static public Bitmap bitmapFromGray(byte[] data, int width, int height) {
         Bitmap image = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8);

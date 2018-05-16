@@ -1,6 +1,7 @@
 package ru.landyrev.howtodraw
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -29,7 +30,11 @@ class GalleryActivity: FragmentActivity()  {
             galleryViewPager.setCurrentItem(galleryViewPager.currentItem + 1, true)
         }
 
-        galleryToolbar.title = level.title_ru
+        recognizeButton.setOnClickListener {
+            openCamera()
+        }
+
+        galleryToolbar.title = level.title
         galleryToolbar.setNavigationOnClickListener {
             this.finish()
         }
@@ -40,7 +45,7 @@ class GalleryActivity: FragmentActivity()  {
 
     inner class OnPageChange: ViewPager.OnPageChangeListener {
         override fun onPageSelected(position: Int) {
-//            galleryToolbar.title = "${level.title_ru} (${position + 1} из ${level.tutorials.size})"
+//            galleryToolbar.title = "${level.title} (${position + 1} из ${level.tutorials.size})"
             if (position + 1 == level.tutorials.size) {
                 nextButton.visibility = Button.INVISIBLE
                 recognizeButton.visibility = Button.VISIBLE
@@ -54,6 +59,13 @@ class GalleryActivity: FragmentActivity()  {
 
         override fun onPageScrollStateChanged(state: Int) {}
 
+    }
+
+    private fun openCamera() {
+        val intent = Intent(this, CameraActivity::class.java).apply {
+            putExtra("level_name", level.name)
+        }
+        this.startActivity(intent)
     }
 }
 

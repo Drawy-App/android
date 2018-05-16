@@ -1,5 +1,6 @@
 package ru.landyrev.howtodraw.util;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 import java.util.List;
@@ -31,7 +32,7 @@ public interface Classifier {
         /** Optional location within the source image for the location of the recognized object. */
         private RectF location;
 
-        public Recognition(
+        Recognition(
                 final String id, final String title, final Float confidence, final RectF location) {
             this.id = id;
             this.title = title;
@@ -59,6 +60,7 @@ public interface Classifier {
             this.location = location;
         }
 
+        @SuppressLint("DefaultLocale")
         @Override
         public String toString() {
             String resultString = "";

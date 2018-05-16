@@ -1,6 +1,9 @@
 package ru.landyrev.howtodraw.data
 
 class Stage (val stageNumber: Int, val levels: List<Level>) {
-    val title: String
-        get() = "$stageNumber уровень"
+
+    val unlocked: Boolean
+        get() {
+            return LevelsData.totalRating >= LevelsData.steps[stageNumber]!!
+        }
 }

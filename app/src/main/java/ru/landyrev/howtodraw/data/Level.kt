@@ -15,8 +15,8 @@ import ru.landyrev.howtodraw.DetailsActivity
 import ru.landyrev.howtodraw.GalleryActivity
 import ru.landyrev.howtodraw.views.ImageCardView
 
-class Level(val difficulty: Int, val level: Int, val name: String, val title_en: String,
-            val title_ru: String, val tutorials: List<String>, val context: Context) {
+class Level(val difficulty: Int, val level: Int, val name: String,
+            val title: String, val tutorials: List<String>, val context: Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(
             "levels",
             Context.MODE_PRIVATE

@@ -39,7 +39,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:paddingLeft="14dp">
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp">
 
                 <TextView
                     android:id="@+id/tutorialCardViewTitle"
@@ -49,7 +50,8 @@
                     android:text="TextView"
                     android:textAlignment="viewStart"
                     android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    card_view:ignore="HardcodedText" />
 
                 <ru.landyrev.howtodraw.views.RatingView
                     android:id="@+id/cardRatingView"

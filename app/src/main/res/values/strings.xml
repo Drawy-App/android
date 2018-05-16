@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">How to Draw</string>
-    <string name="title">КАК РИСОВАТЬ</string>
-    <string name="subtitle">ПО ШАГАМ</string>
-    <string name="detailsTitle">Рисование</string>
-    <string name="make_photo">Сфотографировать</string>
-    <string name="recognizeButton">Распознать</string>
-    <string name="nextButton">Дальше</string>
-    <string name="successTitle">Ура, у вас получилось!</string>
-    <string name="successSubTitle">Скорее начните следующий рисунок</string>
-    <string name="continueButton">Продолжить</string>
+    <string name="title">DRAWING</string>
+    <string name="subtitle">MADE EASY</string>
+    <string name="detailsTitle">Drawing</string>
+    <string name="make_photo">Check</string>
+    <string name="recognizeButton">Check</string>
+    <string name="nextButton">Next</string>
+    <string name="successTitle">Hurray! You\'ve completed this drawing</string>
+    <string name="successSubTitle">Start new picture, to earn more stars</string>
+    <string name="continueButton">Continue</string>
+    <string name="divider_text">Collect %d more 🌟 and unlock new level!</string>
+    <string name="steps">Steps: %d</string>
+    <string name="photo">Photo</string>
+    <string name="found_something">We found something…</string>
+    <string name="level">Level %d</string>
+    <string name="postfix">en</string>
 </resources>

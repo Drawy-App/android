@@ -42,7 +42,7 @@ class CameraActivity : Activity() {
             }
             onCapture = {
                 mainHandler.post {
-                    cameraHint.text = "Кажется мы нашли что-то..."
+                    cameraHint.text = getString(R.string.found_something)
                     cameraFrame.background = ContextCompat.getDrawable(
                             this@CameraActivity,
                             R.drawable.camera_success_background
@@ -65,7 +65,9 @@ class CameraActivity : Activity() {
         if (!solved) {
             solved = true
             mainHandler.post {
-                val intent = Intent(this, SuccessActivity::class.java)
+                val intent = Intent(this, SuccessActivity::class.java).apply {
+                    putExtra("difficulty", level.difficulty)
+                }
                 this.startActivity(intent)
             }
         }

@@ -35,7 +35,7 @@ public class Classify implements Classifier {
     private float imageStd;
 
     // Pre-allocated buffers.
-    private Vector<String> labels = new Vector<>();
+    private final Vector<String> labels = new Vector<>();
     private float[] floatValues;
     private float[] outputs;
     private String[] outputNames;
@@ -74,12 +74,10 @@ public class Classify implements Classifier {
         c.outputName = outputName;
 
         // Read the label names into memory.
-        // TODO(andrewharp): make this handle non-assets.
-        String actualFilename = labelFilename; //.split("file:///android_asset/")[1];
-        Log.i(TAG, "Reading labels from: " + actualFilename);
+        Log.i(TAG, "Reading labels from: " + labelFilename);
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new InputStreamReader(assetManager.open(actualFilename)));
+            br = new BufferedReader(new InputStreamReader(assetManager.open(labelFilename)));
 //            br = new BufferedReader(assetManager.open(actualFilename))
             String line;
             while ((line = br.readLine()) != null) {

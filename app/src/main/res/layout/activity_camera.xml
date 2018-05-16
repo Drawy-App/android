@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@android:color/transparent"
-        app:title="Распознавание"
+        app:title="@string/photo"
         app:navigationIcon="?attr/homeAsUpIndicator"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
