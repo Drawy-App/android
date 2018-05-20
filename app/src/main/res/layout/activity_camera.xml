@@ -22,7 +22,7 @@
         android:theme="?attr/actionBarTheme" />
 
     <io.fotoapparat.view.CameraView
-        android:background="#fff"
+        android:background="#000"
         android:id="@+id/previewView"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -26,7 +26,7 @@ object LevelsData {
     val stagesCount: Int
         get() = data!!.size
 
-    private val unlockedStagesCount: Int
+    val unlockedStagesCount: Int
         get() = data!!.filter { stage -> stage.unlocked }.size
 
     val hasLockedLevels: Boolean

@@ -18,6 +18,7 @@ import ru.landyrev.howtodraw.data.Level
 import ru.landyrev.howtodraw.data.LevelsData
 import ru.landyrev.howtodraw.util.Camera
 import kotlinx.android.synthetic.main.activity_camera.*
+import ru.landyrev.howtodraw.util.Analytics
 import ru.landyrev.howtodraw.util.Background
 
 class CameraActivity : Activity() {
@@ -28,17 +29,20 @@ class CameraActivity : Activity() {
     private lateinit var mainHandler: Handler
     private var solved = false
 
+    private lateinit var viewParams: HashMap<String, Any>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         mainHandler = Handler(this.mainLooper)
         level = LevelsData.levelBy(intent.getStringExtra("level_name"))
         setContentView(R.layout.activity_camera)
-        checkPermissions()
         cameraLayout.background = Background.background
         camera = Camera(this, findViewById(R.id.previewView), level).apply {
             onSuccess = {
                 onSuccess()
+                Analytics.logEvent("success_recognized", viewParams)
             }
             onCapture = {
                 mainHandler.post {
@@ -48,16 +52,24 @@ class CameraActivity : Activity() {
                             R.drawable.camera_success_background
                     )
                 }
+                Analytics.logEvent("found_something", viewParams)
             }
             onLost = {
                 mainHandler.post { cameraHint.text = "" }
                 cameraFrame.setBackgroundColor(Color.TRANSPARENT)
+                Analytics.logEvent("lost_something", viewParams)
             }
         }
 
         cameraToolbar.setNavigationOnClickListener {
             this.finish()
         }
+
+        viewParams = hashMapOf(
+                "name" to level.name,
+                "difficulty" to level.difficulty,
+                "rating" to level.rating
+        )
     }
 
     fun onSuccess() {
@@ -75,7 +87,7 @@ class CameraActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
-        camera.start()
+        cameraStart()
     }
 
     override fun onPause() {
@@ -83,16 +95,31 @@ class CameraActivity : Activity() {
         camera.stop()
     }
 
-    private fun checkPermissions() {
+    private fun cameraStart() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION)
+            Analytics.logEvent("ask_for_permission", viewParams)
+        } else {
+            camera.start()
+            Analytics.logEvent("start_recognizing", viewParams)
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            CAMERA_PERMISSION -> {
+                if (grantResults!!.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    camera.start()
+                    Analytics.logEvent("permissions_granted", viewParams)
+                } else {
+                    Analytics.logEvent("permissions_not_granted", viewParams)
+                }
+            }
+        }
         print("granted?")
     }
+
 }

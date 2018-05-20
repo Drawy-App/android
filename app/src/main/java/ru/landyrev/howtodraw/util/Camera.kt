@@ -1,22 +1,16 @@
 package ru.landyrev.howtodraw.util
 
-import android.app.Activity
 import android.content.Context
-import android.os.Handler
 import android.os.SystemClock
 import android.util.Log
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.configuration.CameraConfiguration
 import io.fotoapparat.parameter.ScaleType
 import io.fotoapparat.preview.Frame
-import io.fotoapparat.result.transformer.originalResolution
-import io.fotoapparat.selector.ResolutionSelector
 import io.fotoapparat.selector.back
 import io.fotoapparat.selector.highestResolution
-import io.fotoapparat.selector.manualJpegQuality
 import io.fotoapparat.view.CameraView
 import ru.landyrev.howtodraw.data.Level
-import ru.landyrev.howtodraw.data.LevelsData
 
 /**
  * Created by landyrev on 24.03.2018.
@@ -54,7 +48,7 @@ class Camera(context: Context, cameraView: CameraView, private val level: Level)
         )
     }
 
-    fun onCaptureLabelLabel(label: String) {
+    private fun onCaptureLabelLabel(label: String) {
         Log.w("CAPTURE", label)
         val nowTime = SystemClock.uptimeMillis()
         if (label == level.name) {

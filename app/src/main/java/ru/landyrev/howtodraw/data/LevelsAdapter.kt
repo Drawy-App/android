@@ -58,7 +58,7 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             ViewTypes.header -> {
                 val linearView = LayoutInflater.from(parent!!.context)
@@ -82,7 +82,7 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
         return LevelsData.viewByIndex(position)!!.type
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = LevelsData.viewByIndex(holder!!.adapterPosition)!!
 
         when(item.type) {

@@ -15,7 +15,7 @@ class GalleryPage: Fragment() {
     private lateinit var imageView: ImageView
     var image: Bitmap? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.gallery_page, container, false) as ViewGroup
         imageView = rootView.findViewById(R.id.galleryPageImageView)
         imageView.setImageBitmap(image)

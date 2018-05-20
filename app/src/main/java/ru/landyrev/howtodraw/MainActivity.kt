@@ -16,8 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LevelsData.loadImages(this)
-        Background.load(this)
         setContentView(R.layout.activity_main)
 
         mainActivityBackground.background = Background.background
