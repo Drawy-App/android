@@ -5,6 +5,7 @@ import ru.landyrev.howtodraw.data.LevelsData
 import ru.landyrev.howtodraw.util.Analytics
 import ru.landyrev.howtodraw.util.Background
 
+@Suppress("unused")
 class MainApp: Application() {
     override fun onCreate() {
         super.onCreate()

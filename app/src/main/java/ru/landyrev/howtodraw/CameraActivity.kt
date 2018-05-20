@@ -1,25 +1,20 @@
 package ru.landyrev.howtodraw
 
 import android.Manifest
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.MainThread
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.view.View
+import kotlinx.android.synthetic.main.activity_camera.*
 import ru.landyrev.howtodraw.data.Level
 import ru.landyrev.howtodraw.data.LevelsData
-import ru.landyrev.howtodraw.util.Camera
-import kotlinx.android.synthetic.main.activity_camera.*
 import ru.landyrev.howtodraw.util.Analytics
 import ru.landyrev.howtodraw.util.Background
+import ru.landyrev.howtodraw.util.Camera
 
 class CameraActivity : Activity() {
 

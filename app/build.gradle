@@ -6,6 +6,14 @@ apply plugin: 'kotlin-android-extensions'
 
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword 'dyc9cXhdpg'
+            storeFile file('/Users/landyrev/.yandex.disk/213453928/Yandex.Disk.localized/keys/howtodraw.android/gp_key')
+            storePassword 'dyc9cXhdpg'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "ru.landyrev.howtodraw"
@@ -46,7 +54,7 @@ dependencies {
     implementation 'com.android.support:support-compat:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'io.fotoapparat.fotoapparat:library:2.2.0'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.google.firebase:firebase-core:15.0.2'

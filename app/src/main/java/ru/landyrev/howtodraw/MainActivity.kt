@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import ru.landyrev.howtodraw.data.LevelsAdapter
-import ru.landyrev.howtodraw.data.LevelsData
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.landyrev.howtodraw.data.LevelsAdapter
 import ru.landyrev.howtodraw.util.Background
 
 class MainActivity : AppCompatActivity() {

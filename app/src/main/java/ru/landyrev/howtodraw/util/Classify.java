@@ -75,7 +75,7 @@ public class Classify implements Classifier {
 
         // Read the label names into memory.
         Log.i(TAG, "Reading labels from: " + labelFilename);
-        BufferedReader br = null;
+        BufferedReader br;
         try {
             br = new BufferedReader(new InputStreamReader(assetManager.open(labelFilename)));
 //            br = new BufferedReader(assetManager.open(actualFilename))
@@ -115,13 +115,6 @@ public class Classify implements Classifier {
         c.tmpBuffer = ByteBuffer.allocate(inputSize * inputSize);
 
         return c;
-    }
-
-    private void toRgb(float r, float g, float b) {
-        float[] colors = {r, g, b};
-        Arrays.sort(colors);
-        float gray = (colors[0] + colors[2]) / 2.0f;
-        r = gray; g = gray; b = gray;
     }
 
     @Override
