@@ -111,7 +111,7 @@ class CameraActivity : Activity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             CAMERA_PERMISSION -> {
-                if (grantResults!!.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     camera.start()
                     Analytics.logEvent("permissions_granted", viewParams)
                 } else {

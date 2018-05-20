@@ -40,6 +40,7 @@ object LevelsData {
 
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun loadImages(context: Context) {
         val yaml = Yaml()
         val data = yaml.load(context.assets.open("Images.bundle/levels.yaml"))

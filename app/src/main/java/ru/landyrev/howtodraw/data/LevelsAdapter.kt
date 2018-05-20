@@ -1,19 +1,16 @@
 package ru.landyrev.howtodraw.data
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import kotlinx.android.synthetic.*
 import ru.landyrev.howtodraw.DetailsActivity
 import ru.landyrev.howtodraw.R
 import ru.landyrev.howtodraw.views.RatingView
@@ -61,17 +58,17 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             ViewTypes.header -> {
-                val linearView = LayoutInflater.from(parent!!.context)
+                val linearView = LayoutInflater.from(parent.context)
                         .inflate(R.layout.level_header, parent, false) as LinearLayout
                 ViewHeaderHolder(linearView)
             }
             ViewTypes.divider -> {
-                val linearView = LayoutInflater.from(parent!!.context)
+                val linearView = LayoutInflater.from(parent.context)
                         .inflate(R.layout.divider, parent, false) as LinearLayout
                 ViewDividerHolder(linearView)
             }
             else -> {
-                val linearView = LayoutInflater.from(parent!!.context)
+                val linearView = LayoutInflater.from(parent.context)
                         .inflate(R.layout.level_card, parent, false) as LinearLayout
                 ViewBodyHolder(linearView)
             }
@@ -83,7 +80,7 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = LevelsData.viewByIndex(holder!!.adapterPosition)!!
+        val item = LevelsData.viewByIndex(holder.adapterPosition)!!
 
         when(item.type) {
             ViewTypes.body -> {
