@@ -23,7 +23,7 @@ object Analytics {
 
     fun logEvent(eventName: String, params: HashMap<String, Any>) {
         val bundle = Bundle()
-        params.forEach { k, v ->
+        params.forEach { (k, v) ->
             run {
                 if (v is String) {
                     bundle.putString(k, v)
