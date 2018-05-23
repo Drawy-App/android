@@ -1,6 +1,8 @@
 package ru.landyrev.howtodraw
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_details.*
@@ -14,6 +16,8 @@ class DetailsActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+
+        detailsToolbar.navigationIcon!!.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
 
         detailsBackgroundView.background = Background.background
 

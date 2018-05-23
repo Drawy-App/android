@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.ActivityCompat
@@ -29,10 +30,13 @@ class CameraActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_camera)
+
+        cameraToolbar.navigationIcon!!.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
 
         mainHandler = Handler(this.mainLooper)
         level = LevelsData.levelBy(intent.getStringExtra("level_name"))
-        setContentView(R.layout.activity_camera)
+
         cameraLayout.background = Background.background
         camera = Camera(this, findViewById(R.id.previewView), level).apply {
             onSuccess = {

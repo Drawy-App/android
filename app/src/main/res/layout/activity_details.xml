@@ -35,6 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             app:titleTextColor="@color/colorForeground"
+            app:subtitleTextColor="@color/colorForeground"
             app:title="@string/detailsTitle"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
