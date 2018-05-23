@@ -50,6 +50,7 @@ repositories {
 }
 
 dependencies {
+    implementation "com.android.support:support-emoji:27.1.1"
     implementation 'org.tensorflow:tensorflow-lite:0.1.2-nightly'
     implementation 'com.android.support:support-compat:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'

@@ -123,7 +123,8 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
             ViewTypes.divider -> {
                 (holder as ViewDividerHolder).title.text = context.getString(
                         R.string.divider_text,
-                        LevelsData.ratingToNewLevel
+                        LevelsData.ratingToNewLevel,
+                        "\ud83c\udf1f"
                 )
             }
         }

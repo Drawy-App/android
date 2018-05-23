@@ -9,7 +9,7 @@
     <string name="successTitle">Ура, у вас получилось!</string>
     <string name="successSubTitle">Скорее начните следующий рисунок</string>
     <string name="continueButton">Продолжить</string>
-    <string name="divider_text">Соберите ещё %d 🌟 и откройте новый уровень!</string>
+    <string name="divider_text">Соберите ещё %1$d %2$s и откройте новый уровень!</string>
     <string name="steps">Шагов: %d</string>
     <string name="photo">Фото</string>
     <string name="found_something">Кажется мы нашли что-то…</string>
