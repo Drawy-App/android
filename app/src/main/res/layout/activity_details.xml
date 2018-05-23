@@ -34,6 +34,7 @@
             android:id="@+id/detailsToolbar"
             android:layout_width="0dp"
             android:layout_height="56dp"
+            app:titleTextColor="@color/colorForeground"
             app:title="@string/detailsTitle"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
@@ -133,6 +134,7 @@
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="@string/make_photo"
+            android:textColor="@color/colorForeground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
