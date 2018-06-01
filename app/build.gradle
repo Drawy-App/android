@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'io.fabric'
+
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
@@ -59,7 +61,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.google.firebase:firebase-core:15.0.2'
-    implementation 'com.google.firebase:firebase-crash:15.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -69,6 +70,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'org.tensorflow:tensorflow-android:1.7.0'
     implementation 'com.yandex.android:mobmetricalib:3.0.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

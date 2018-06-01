@@ -1,3 +1,4 @@
+generic square
 lutz aquarium0
 lutz boat0
 lutz boat1
