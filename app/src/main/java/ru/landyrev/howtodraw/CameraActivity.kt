@@ -54,8 +54,10 @@ class CameraActivity : Activity() {
                 Analytics.logEvent("found_something", viewParams)
             }
             onLost = {
-                mainHandler.post { cameraHint.text = "" }
-                cameraFrame.setBackgroundColor(Color.TRANSPARENT)
+                mainHandler.post {
+                    cameraHint.text = ""
+                    cameraFrame.setBackgroundColor(Color.TRANSPARENT)
+                }
                 Analytics.logEvent("lost_something", viewParams)
             }
         }
