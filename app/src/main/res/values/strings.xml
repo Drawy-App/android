@@ -15,4 +15,7 @@
     <string name="found_something">We found something…</string>
     <string name="level">Level %d</string>
     <string name="postfix">en</string>
+    <string name="tutorialOne">All you need is paper and pencil</string>
+    <string name="tutorialTwo">Draw using simple step-by-step tutorials</string>
+    <string name="tutorialThree">Neural network recognizes your drawings to unlock new ones</string>
 </resources>

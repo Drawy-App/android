@@ -15,4 +15,7 @@
     <string name="found_something">Кажется мы нашли что-то…</string>
     <string name="level">Уровень %d</string>
     <string name="postfix">ru</string>
+    <string name="tutorialOne">Всё что вам понадобится – бумага и карандаш</string>
+    <string name="tutorialTwo">Рисуйте картинки, используя простые пошаговые инструкции</string>
+    <string name="tutorialThree">Нейросеть распознает рисунок и откроет доступ к новым</string>
 </resources>

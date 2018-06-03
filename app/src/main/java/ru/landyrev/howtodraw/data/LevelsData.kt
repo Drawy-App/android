@@ -4,7 +4,6 @@ import android.content.Context
 import org.yaml.snakeyaml.Yaml
 import ru.landyrev.howtodraw.R
 import java.util.*
-import kotlin.collections.HashMap
 
 object LevelsData {
     var data: List<Stage>? = null
@@ -95,7 +94,8 @@ object LevelsData {
     }
 
     val steps: HashMap<Int, Int> = hashMapOf(
-            1 to 0,
+            0 to 0,
+            1 to 1,
             2 to 3,
             3 to 7,
             4 to 12,
