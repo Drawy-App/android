@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import ru.landyrev.howtodraw.DetailsActivity
 import ru.landyrev.howtodraw.R
+import ru.landyrev.howtodraw.TryItActivity
 import ru.landyrev.howtodraw.views.RatingView
 
 
@@ -131,8 +132,12 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
     }
 
     private fun openTutorial(level: Level) {
-        val intent = Intent(context, DetailsActivity::class.java).apply {
-            putExtra("name", level.name)
+        val intent = if (level.name == "generic_square") {
+            Intent(context, TryItActivity::class.java)
+        } else {
+            Intent(context, DetailsActivity::class.java).apply {
+                putExtra("name", level.name)
+            }
         }
         context.startActivity(intent)
     }

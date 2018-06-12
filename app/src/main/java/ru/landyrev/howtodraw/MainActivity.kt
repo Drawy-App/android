@@ -1,5 +1,6 @@
 package ru.landyrev.howtodraw
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.landyrev.howtodraw.data.LevelsAdapter
 import ru.landyrev.howtodraw.util.Background
+import ru.landyrev.howtodraw.util.UserData
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mRecyclerView: RecyclerView
@@ -27,6 +29,16 @@ class MainActivity : AppCompatActivity() {
             layoutManager = mLayoutManager
             adapter = viewAdapter
         }
+        if (!UserData(this).tutorialPassed) {
+            startTutorial()
+        }
+    }
+
+    private fun startTutorial() {
+        val intent = Intent(this, TutorialActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        }
+        this.startActivity(intent)
     }
 
     override fun onResume() {

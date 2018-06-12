@@ -18,4 +18,6 @@
     <string name="tutorialOne">Всё что вам понадобится – бумага и карандаш</string>
     <string name="tutorialTwo">Рисуйте картинки, используя простые пошаговые инструкции</string>
     <string name="tutorialThree">Нейросеть распознает рисунок и откроет доступ к новым</string>
+    <string name="tryIt">Попробуйте</string>
+    <string name="tryItLabel">Нарисуйте квадрат.\n\nИнтересно, распознает ли нейросеть эту фигуру? %1$s</string>
 </resources>

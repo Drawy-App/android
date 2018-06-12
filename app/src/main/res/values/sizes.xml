@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="footerSize">82dp</dimen>
+    <dimen name="footerButtonSize">52dp</dimen>
+    <dimen name="tutorialDownSpace">40dp</dimen>
+</resources>

@@ -1,5 +1,6 @@
 package ru.landyrev.howtodraw
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.constraint.ConstraintLayout
@@ -19,6 +20,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_tutorial.*
 import kotlinx.android.synthetic.main.tutorial_page.*
 import ru.landyrev.howtodraw.util.Background
+import ru.landyrev.howtodraw.util.UserData
 
 class TutorialActivity: AppCompatActivity() {
 
@@ -31,16 +33,32 @@ class TutorialActivity: AppCompatActivity() {
 
         viewPager = tutorialPager
         viewPager.adapter = TutorialPagerAdapter(supportFragmentManager)
+
+        nextButton.setOnClickListener {
+            val nextPage = viewPager.currentItem + 1
+            if (nextPage > 2) {
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                }
+                this.startActivity(intent)
+                UserData(this).tutorialPassed = true
+            } else {
+                viewPager.setCurrentItem(nextPage, true)
+            }
+        }
     }
-
-
 }
 
 class TutorialPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
 
     class TutorialFragment: Fragment() {
-        var topAnimatePosition: Int = 0
-        var bottomAnimatePosition: Int = 0
+        private var animDelaysHandler: Handler? = null
+        private var picDelaysHandler: Handler? = null
+        var topAnimatePosition: Int = 220
+        var bottomAnimatePosition: Int = 120
+        var bottomImageStartPosition: Int = 0
+        val startTimeout: Long = 1000
         lateinit var imageOne: ImageView
         lateinit var textLabelView: TextView
         var pageNumber = 0
@@ -54,14 +72,17 @@ class TutorialPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
             super.onStart()
             val scale = context!!.resources.displayMetrics.density
 
-            topAnimatePosition = (280 * scale).toInt()
-            bottomAnimatePosition = (120 * scale).toInt()
+            topAnimatePosition = (topAnimatePosition * scale).toInt()
+            bottomAnimatePosition = (bottomAnimatePosition * scale).toInt()
+            bottomImageStartPosition = context!!.resources.getDimension(R.dimen.tutorialDownSpace).toInt()
+            bottomImageStartPosition = (bottomImageStartPosition * scale).toInt()
+
 
             imageOne = tutorialImageOne
             textLabelView = tutorialLabel
 
             tutorialImageOne.layoutParams = (tutorialImageOne.layoutParams as ConstraintLayout.LayoutParams).apply {
-                topMargin = if (pageNumber == 2) { 280 } else { 0 }
+                topMargin = if (pageNumber == 2) { bottomImageStartPosition } else { 0 }
             }
 
             when (pageNumber) {
@@ -83,13 +104,19 @@ class TutorialPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
             textLabelView.text = textLabel
         }
 
+        override fun onDestroy() {
+            super.onDestroy()
+            this.resetAnimate()
+        }
+
         override fun setUserVisibleHint(isVisibleToUser: Boolean) {
             super.setUserVisibleHint(isVisibleToUser)
             when (pageNumber) {
                 2 -> {
-                    resetAnimate()
                     if (isVisibleToUser) {
                         startAnimate()
+                    } else {
+                        resetAnimate()
                     }
                 }
             }
@@ -97,19 +124,29 @@ class TutorialPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
 
         fun resetAnimate() {
             if (tutorialTwoImageContainer != null) {
-                tutorialTwoImageContainer.layoutParams = (tutorialTwoImageContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    bottomMargin = topAnimatePosition
-                }
                 Handler(context!!.mainLooper).post {
+                    if (picDelaysHandler != null) { picDelaysHandler!!.removeCallbacksAndMessages(null) }
+                    if (animDelaysHandler != null) { animDelaysHandler!!.removeCallbacksAndMessages(null) }
+                    tutorialTwoImageContainer.clearAnimation()
+                    if (tutorialTwoImageContainer.animation != null) {
+                        tutorialTwoImageContainer.animation.cancel()
+                    }
+                    tutorialTwoImageContainer.layoutParams = (tutorialTwoImageContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
+                        bottomMargin = topAnimatePosition
+                    }
                     tutorialImageTwo.setImageResource(R.drawable.phone_empty)
                 }
             }
         }
 
-        fun startAnimate() {
-            Handler().postDelayed({
-                animateBottom()
-            }, 1000)
+        private fun startAnimate() {
+            Handler(context!!.mainLooper).postDelayed({
+                if (context != null) {
+                    animDelaysHandler = Handler(context!!.mainLooper)
+                    picDelaysHandler = Handler(context!!.mainLooper)
+                    animateBottom()
+                }
+            }, startTimeout)
         }
 
         fun animateTop() {
@@ -127,10 +164,10 @@ class TutorialPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
                                 if (!isVisible) {
                                     return
                                 }
-                                Handler().postDelayed({
+                                animDelaysHandler!!.postDelayed({
                                     animateBottom()
                                 }, 2000)
-                                Handler(context!!.mainLooper).postDelayed({
+                                picDelaysHandler!!.postDelayed({
                                     if (tutorialImageTwo != null) {
                                         tutorialImageTwo.setImageResource(R.drawable.phone_empty)
                                     }
@@ -160,10 +197,10 @@ class TutorialPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
                                 if (!isVisible) {
                                     return
                                 }
-                                Handler().postDelayed({
+                                animDelaysHandler!!.postDelayed({
                                     animateTop()
                                 }, 2000)
-                                Handler(context!!.mainLooper).postDelayed({
+                                picDelaysHandler!!.postDelayed({
                                     tutorialImageTwo.setImageResource(R.drawable.phone)
                                 }, 500)
                             }
