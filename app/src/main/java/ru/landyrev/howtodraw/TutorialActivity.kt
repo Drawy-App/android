@@ -201,7 +201,9 @@ class TutorialPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
                                     animateTop()
                                 }, 2000)
                                 picDelaysHandler!!.postDelayed({
-                                    tutorialImageTwo.setImageResource(R.drawable.phone)
+                                    if (tutorialImageTwo != null) {
+                                        tutorialImageTwo.setImageResource(R.drawable.phone)
+                                    }
                                 }, 500)
                             }
 
