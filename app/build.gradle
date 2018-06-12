@@ -21,8 +21,8 @@ android {
         applicationId "ru.landyrev.howtodraw"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 104
-        versionName "1.0.4"
+        versionCode 105
+        versionName "1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
