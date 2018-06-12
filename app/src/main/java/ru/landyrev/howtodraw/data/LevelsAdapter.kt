@@ -122,11 +122,16 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
                 }
             }
             ViewTypes.divider -> {
-                (holder as ViewDividerHolder).title.text = context.getString(
-                        R.string.divider_text,
-                        LevelsData.ratingToNewLevel,
-                        "\ud83c\udf1f"
-                )
+                val stageNumber = item.data as Int
+                if (stageNumber == 1) {
+                    (holder as ViewDividerHolder).title.text = context.getString(R.string.first_divider_text)
+                } else {
+                    (holder as ViewDividerHolder).title.text = context.getString(
+                            R.string.divider_text,
+                            LevelsData.ratingToNewLevel,
+                            "\ud83c\udf1f"
+                    )
+                }
             }
         }
     }

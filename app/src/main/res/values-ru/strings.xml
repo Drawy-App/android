@@ -20,4 +20,5 @@
     <string name="tutorialThree">Нейросеть распознает рисунок и откроет доступ к новым</string>
     <string name="tryIt">Попробуйте</string>
     <string name="tryItLabel">Нарисуйте квадрат.\n\nИнтересно, распознает ли нейросеть эту фигуру? %1$s</string>
+    <string name="first_divider_text">Нарисуйте квадрат, чтобы открыть остальные картинки</string>
 </resources>

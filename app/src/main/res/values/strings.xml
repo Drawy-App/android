@@ -10,6 +10,7 @@
     <string name="successSubTitle">Start new picture, to earn more stars</string>
     <string name="continueButton">Continue</string>
     <string name="divider_text" tools:ignore="PluralsCandidate">Collect %1$d more %2$s and unlock new level!</string>
+    <string name="first_divider_text">Try to draw a square, to unlock new levels</string>
     <string name="steps">Steps: %d</string>
     <string name="photo">Photo</string>
     <string name="found_something">We found something…</string>

@@ -19,7 +19,7 @@ object LevelsData {
 
     val ratingToNewLevel: Int
         get() {
-            return steps[unlockedStagesCount + 1]!! - totalRating
+            return steps[unlockedStagesCount]!! - totalRating
         }
 
     val stagesCount: Int
@@ -72,9 +72,9 @@ object LevelsData {
         var i = 0
 
         data!!.forEach { stage ->
-            if (stage.stageNumber - 1 == LevelsData.unlockedStagesCount) {
+            if (stage.stageNumber == LevelsData.unlockedStagesCount) {
                 if (i == index) {
-                    return ViewData(ViewTypes.DIVIDER, 0, stage.unlocked)
+                    return ViewData(ViewTypes.DIVIDER, stage.stageNumber, stage.unlocked)
                 }
                 i++
             }
