@@ -2,5 +2,5 @@
 <resources>
     <dimen name="footerSize">100dp</dimen>
     <dimen name="footerButtonSize">60dp</dimen>
-    <dimen name="tutorialDownSpace">160dp</dimen>
+    <dimen name="tutorialDownSpace">60dp</dimen>
 </resources>
