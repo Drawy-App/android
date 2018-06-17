@@ -71,6 +71,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-android:1.7.0'
     implementation 'com.yandex.android:mobmetricalib:3.0.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
+    implementation 'com.applovin:applovin-sdk:+'
 }
 
 apply plugin: 'com.google.gms.google-services'

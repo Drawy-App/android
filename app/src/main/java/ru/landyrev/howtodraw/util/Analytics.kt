@@ -2,6 +2,7 @@ package ru.landyrev.howtodraw.util
 
 import android.app.Application
 import android.os.Bundle
+import com.applovin.sdk.AppLovinSdk
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -27,6 +28,8 @@ object Analytics {
         YandexMetrica.activate(context, yandexMetricaConfig)
         YandexMetrica.enableActivityAutoTracking(app)
         collectUserProperties()
+
+        AppLovinSdk.initializeSdk(context)
     }
 
     fun logEvent(eventName: String, params: HashMap<String, Any>) {

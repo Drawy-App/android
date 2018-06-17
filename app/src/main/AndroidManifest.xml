@@ -3,6 +3,7 @@
     package="ru.landyrev.howtodraw">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -60,6 +61,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data android:name="applovin.sdk.key"
+            android:value="bTcbduWmeOciiDESU-oVRO-vwrMpwG6Vlk5Mcc6G_kzixCAPBywcKuWEkt2d897ttCEUqLlp3iW-vgO5cIhyBD"  />
     </application>
 
 </manifest>
