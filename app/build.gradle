@@ -74,6 +74,7 @@ dependencies {
     implementation 'com.applovin:applovin-sdk:+'
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.amplitude:android-sdk:2.14.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
