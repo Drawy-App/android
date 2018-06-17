@@ -32,5 +32,5 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="@string/UNLOCK_ALL_LEVELS_BUTTON"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 </LinearLayout>

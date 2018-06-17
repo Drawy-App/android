@@ -1,7 +1,6 @@
 package ru.landyrev.howtodraw.util
 
 import android.content.Context
-import ru.landyrev.howtodraw.BuildConfig
 import ru.landyrev.howtodraw.data.LevelsData
 
 class UserData (val context: Context) {
@@ -12,8 +11,9 @@ class UserData (val context: Context) {
 
     var tutorialPassed: Boolean
         get() {
-            return !BuildConfig.DEBUG &&
-                    (sharedPreferences.getBoolean("tutorialPassed", false) || LevelsData.totalRating > 0)
+//            return !BuildConfig.DEBUG &&
+//                    (sharedPreferences.getBoolean("tutorialPassed", false) || LevelsData.totalRating > 0)
+            return (sharedPreferences.getBoolean("tutorialPassed", false) || LevelsData.totalRating > 0)
         }
         set(value) {
             with(sharedPreferences.edit()) {
@@ -31,5 +31,7 @@ class UserData (val context: Context) {
                 putBoolean("proMode", value)
                 apply()
             }
+            LevelsData.proMode = value
+            Analytics.collectUserProperties()
         }
 }

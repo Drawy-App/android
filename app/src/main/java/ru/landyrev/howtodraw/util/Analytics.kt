@@ -63,5 +63,9 @@ object Analytics {
                 "totalStages",
                 LevelsData.stagesCount.toString()
         )
+        mFirebaseAnalytics.setUserProperty(
+                "isPro",
+                LevelsData.proMode.toString()
+        )
     }
 }

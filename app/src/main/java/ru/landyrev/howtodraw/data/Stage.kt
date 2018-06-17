@@ -4,6 +4,6 @@ class Stage (val stageNumber: Int, val levels: List<Level>) {
 
     val unlocked: Boolean
         get() {
-            return LevelsData.totalRating >= LevelsData.steps[stageNumber]!!
+            return LevelsData.totalRating >= LevelsData.steps[stageNumber]!! || LevelsData.proMode
         }
 }

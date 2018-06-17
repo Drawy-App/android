@@ -34,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == 99) {
+            this.mRecyclerView.adapter.notifyDataSetChanged()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     private fun startTutorial() {
         val intent = Intent(this, TutorialActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

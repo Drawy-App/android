@@ -1,6 +1,6 @@
 package ru.landyrev.howtodraw.data
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.os.Handler
 import android.support.v7.widget.CardView
@@ -19,7 +19,7 @@ import ru.landyrev.howtodraw.TryItActivity
 import ru.landyrev.howtodraw.views.RatingView
 
 
-class LevelsAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LevelsAdapter(private val context: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var openedItem: Int? = null
 
@@ -136,8 +136,9 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
                     )
                     holder.unlockButton.visibility = Button.VISIBLE
                     holder.unlockButton.setOnClickListener {
-                        context.startActivity(
-                                Intent(context, PaywallActivity::class.java)
+                        context.startActivityForResult(
+                                Intent(context, PaywallActivity::class.java),
+                                1
                         )
                     }
                 }
@@ -153,7 +154,7 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
                 putExtra("name", level.name)
             }
         }
-        context.startActivity(intent)
+        context.startActivityForResult(intent, 1)
     }
 
 }

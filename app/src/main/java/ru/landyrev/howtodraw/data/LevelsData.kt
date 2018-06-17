@@ -3,6 +3,7 @@ package ru.landyrev.howtodraw.data
 import android.content.Context
 import org.yaml.snakeyaml.Yaml
 import ru.landyrev.howtodraw.R
+import ru.landyrev.howtodraw.util.UserData
 import java.util.*
 
 object LevelsData {
@@ -13,6 +14,8 @@ object LevelsData {
         const val BODY: Int = 1
         const val DIVIDER: Int = 2
     }
+
+    var proMode = false
 
     val totalLength: Int
         get() = data!!.map { stage -> stage.levels.size }.sum()
@@ -26,10 +29,10 @@ object LevelsData {
         get() = data!!.size
 
     val unlockedStagesCount: Int
-        get() = data!!.filter { stage -> stage.unlocked }.size
+        get() = if (proMode) data!!.size else data!!.filter { stage -> stage.unlocked }.size
 
     val hasLockedLevels: Boolean
-        get() = stagesCount > unlockedStagesCount
+        get() = stagesCount > unlockedStagesCount && !proMode
 
     val totalRating: Int
         get() = data!!.flatMap { stage -> stage.levels}.map { level -> level.rating }.sum()
@@ -64,6 +67,7 @@ object LevelsData {
         this.data = foldedLevels.keys.map { stageName ->
             Stage(stageName, foldedLevels[stageName]!!.toList())
         }.sortedBy(Stage::stageNumber)
+        proMode = UserData(context).proMode
     }
 
     class ViewData(val type: Int, val data: Any, val isUnlocked: Boolean)
