@@ -25,7 +25,7 @@
     <string name="PAY_WALL_TITLE">PRO MODE</string>
     <string name="PAY_BUTTON">Loading…</string>
     <string name="PAY_BUTTON_ERROR">Error</string>
-    <string name="PAY_BUTTON_W_PRICE" translatable="false">Unlock for %1$s</string>
+    <string name="PAY_BUTTON_W_PRICE">Unlock for %1$s</string>
     <string name="BILLING_ERROR_POPUP_TITLE">Payment error</string>
     <string name="BILLING_ERROR_POPUP_BODY">Sorry, but we are not able to complete your payment, for unknown reason :(</string>
     <string name="CLOSE_BUTTON">Close</string>
