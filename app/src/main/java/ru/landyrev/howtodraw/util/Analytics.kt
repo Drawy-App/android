@@ -47,6 +47,7 @@ object Analytics {
                 }
             }
         }
+        YandexMetrica.reportEvent(eventName, params)
         logEvent(eventName, bundle)
     }
 
