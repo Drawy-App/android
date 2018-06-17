@@ -21,4 +21,15 @@ class UserData (val context: Context) {
                 apply()
             }
         }
+
+    var proMode: Boolean
+        get() {
+            return sharedPreferences.getBoolean("proMode", false)
+        }
+        set(value) {
+            with(sharedPreferences.edit()) {
+                putBoolean("proMode", value)
+                apply()
+            }
+        }
 }

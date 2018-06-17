@@ -21,4 +21,18 @@
     <string name="tryIt">Попробуйте</string>
     <string name="tryItLabel">Нарисуйте квадрат.\n\nИнтересно, распознает ли нейросеть эту фигуру? %1$s</string>
     <string name="first_divider_text">Нарисуйте квадрат, чтобы открыть остальные картинки</string>
+    <string name="PAY_WALL_TITLE">ПРО РЕЖИМ</string>
+    <string name="PAY_WALL_TEXT">Хотите всё и сразу?\n\nВ про режиме все уровни доступны без ограничений!</string>
+    <string name="PAY_BUTTON">Загрузка…</string>
+    <string name="PAY_BUTTON_ERROR">Ошибка</string>
+    <string name="PAY_BUTTON_W_PRICE">Разблокировать за %1$s</string>
+    <string name="BILLING_ERROR_POPUP_TITLE">Ошибка при оплате</string>
+    <string name="BILLING_ERROR_POPUP_BODY">Извините, но у нас не получается совершить оплату по неизвестной причине :(</string>
+    <string name="CLOSE_BUTTON">Закрыть</string>
+    <string name="PAY_SUCCESS_TITLE">Успешная оплата</string>
+    <string name="PAY_SUCCESS_BODY">Поздравляем, теперь вы Про! Скорее начинайте рисовать</string>
+    <string name="RESTORE_FAILED_BODY">Похоже, что вы ещё ни разу не приобретали Про режим</string>
+    <string name="RESTORE_BUTTON">Восстановить покупку</string>
+    <string name="CONTINUE_BUTTON">Продолжить</string>
+    <string name="UNLOCK_ALL_LEVELS_BUTTON">Открыть все уровни</string>
 </resources>

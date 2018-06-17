@@ -21,4 +21,18 @@
     <string name="tutorialThree">Neural network recognizes your drawings to unlock new ones</string>
     <string name="tryIt">Try it</string>
     <string name="tryItLabel">Draw a square.\n\nWill the neural network recognize\u00A0it? %1$s</string>
+    <string name="PAY_WALL_TEXT">Unlock all tutorials just in 10 seconds!</string>
+    <string name="PAY_WALL_TITLE">PRO MODE</string>
+    <string name="PAY_BUTTON">Loading…</string>
+    <string name="PAY_BUTTON_ERROR">Error</string>
+    <string name="PAY_BUTTON_W_PRICE" translatable="false">Unlock for %1$s</string>
+    <string name="BILLING_ERROR_POPUP_TITLE">Payment error</string>
+    <string name="BILLING_ERROR_POPUP_BODY">Sorry, but we are not able to complete your payment, for unknown reason :(</string>
+    <string name="CLOSE_BUTTON">Close</string>
+    <string name="PAY_SUCCESS_TITLE">Success payment</string>
+    <string name="PAY_SUCCESS_BODY">Congratulations, now you are a Pro!</string>
+    <string name="RESTORE_FAILED_BODY">Unfortunately, we can\'t find your previous purchase</string>
+    <string name="RESTORE_BUTTON">Restore purchase</string>
+    <string name="CONTINUE_BUTTON">Continue</string>
+    <string name="UNLOCK_ALL_LEVELS_BUTTON">Unlock all levels</string>
 </resources>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/levelSectionHeaderView"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,14 +11,26 @@
         android:id="@+id/dividerTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="@font/roboto_medium"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/colorForeground"
-        android:textSize="20sp"
+        android:textSize="18sp"
         tools:text="Divider" />
+
+    <Button
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/unlockButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/UNLOCK_ALL_LEVELS_BUTTON"
+        android:visibility="invisible" />
 </LinearLayout>

@@ -8,10 +8,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import ru.landyrev.howtodraw.DetailsActivity
+import ru.landyrev.howtodraw.PaywallActivity
 import ru.landyrev.howtodraw.R
 import ru.landyrev.howtodraw.TryItActivity
 import ru.landyrev.howtodraw.views.RatingView
@@ -53,6 +55,7 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
 
     class ViewDividerHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.dividerTitle)
+        val unlockButton: Button = itemView.findViewById(R.id.unlockButton)
     }
 
 
@@ -131,6 +134,12 @@ class LevelsAdapter(private val context: Context): RecyclerView.Adapter<Recycler
                             LevelsData.ratingToNewLevel,
                             "\ud83c\udf1f"
                     )
+                    holder.unlockButton.visibility = Button.VISIBLE
+                    holder.unlockButton.setOnClickListener {
+                        context.startActivity(
+                                Intent(context, PaywallActivity::class.java)
+                        )
+                    }
                 }
             }
         }
