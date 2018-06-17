@@ -68,7 +68,7 @@ object Analytics {
         )
         Amplitude.getInstance().clearUserProperties()
         Amplitude.getInstance().setUserProperties(JSONObject(userProperties))
-        userProperties.forEach { t, u ->
+        userProperties.forEach { (t, u) ->
             mFirebaseAnalytics.setUserProperty(t, u)
         }
 
