@@ -35,4 +35,6 @@
     <string name="RESTORE_BUTTON">Restore purchase</string>
     <string name="CONTINUE_BUTTON">Continue</string>
     <string name="UNLOCK_ALL_LEVELS_BUTTON">Unlock all levels</string>
+    <string name="facebook_app_id">583744185320259</string>
+    <string name="fb_login_protocol_scheme">fb583744185320259</string>
 </resources>

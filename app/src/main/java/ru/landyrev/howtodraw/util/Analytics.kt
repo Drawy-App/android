@@ -6,6 +6,8 @@ import com.amplitude.api.Amplitude
 import com.applovin.sdk.AppLovinSdk
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.yandex.metrica.YandexMetrica
 import com.yandex.metrica.YandexMetricaConfig
@@ -14,12 +16,17 @@ import org.json.JSONObject
 import ru.landyrev.howtodraw.BuildConfig
 import ru.landyrev.howtodraw.data.LevelsData
 
+
+
 object Analytics {
     private lateinit var mFirebaseAnalytics: FirebaseAnalytics
+    private lateinit var fbLogger: AppEventsLogger
 
     fun init(app: Application) {
         val context = app.applicationContext
+        FacebookSdk.sdkInitialize(context)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(context)
+        fbLogger = AppEventsLogger.newLogger(context)
         val yandexMetricaConfig = YandexMetricaConfig.newConfigBuilder(
                 "8d6b75c1-2467-44e7-a36c-653ff1b689b4"
         ).build()
@@ -51,13 +58,21 @@ object Analytics {
                 }
             }
         }
-        YandexMetrica.reportEvent(eventName, params)
         logEvent(eventName, bundle)
-        Amplitude.getInstance().logEvent(eventName, JSONObject(params))
     }
 
     fun logEvent(eventName: String, params: Bundle) {
+        val mappedParams = mutableMapOf<String, Any>()
+
+        params.keySet().forEach { paramName ->
+            mappedParams[paramName] = params[paramName]
+        }
+
         mFirebaseAnalytics.logEvent(eventName, params)
+        Amplitude.getInstance().logEvent(eventName, JSONObject(mappedParams))
+        YandexMetrica.reportEvent(eventName, mappedParams)
+        fbLogger.logEvent(eventName, params)
+
     }
 
     fun collectUserProperties() {
